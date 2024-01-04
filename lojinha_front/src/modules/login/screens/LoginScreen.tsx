@@ -1,21 +1,27 @@
-import { BackGoundImage, Button, DivInput, Input, InputContainer, LoginSection } from "../styled/loginScreen.styles"
+import { Div, ImageSection, LoginSection, InputContainer, DivInput, Input, Button } from "../styled/loginScreen.styles"
+import axios from "axios"
+
 
 export const LoginScreen = () => {
     return (
-        <LoginSection>
-            <BackGoundImage src="./background.png"></BackGoundImage>
-            <InputContainer>
-                <DivInput>
-                    <label>Email</label>
-                    <Input></Input>
-                </DivInput>
-                <DivInput>
-                    <label>Password</label>
-                    <Input></Input>
-                </DivInput>
-                <Button>SignIn</Button>
-            </InputContainer>
-        </LoginSection>
+        <Div>
+            <ImageSection src="./background.png"></ImageSection>
+            <LoginSection>
+                <InputContainer>
+                    <h1>Login</h1>
+                    <DivInput>
+                        <label>Email</label>
+                        <Input></Input>
+                    </DivInput>
+                    <DivInput>
+                        <label>Password</label>
+                        <Input></Input>
+                    </DivInput>
+                    <Button type="submit">Enter</Button>
+                </InputContainer>
+            </LoginSection>
+        </Div>
+
     )
 }
 

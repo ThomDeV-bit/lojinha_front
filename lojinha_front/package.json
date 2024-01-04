@@ -10,9 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@remix-run/node": "^2.4.1",
+    "@remix-run/react": "^2.4.1",
+    "@remix-run/router": "^1.14.1",
+    "@remix-run/serve": "^2.4.1",
     "antd": "^5.12.7",
+    "axios": "^1.6.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.1",
     "styled-components": "^6.1.6"
   },
   "devDependencies": {

@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
-
-export const BackGoundImage = styled.img`
-	position: absolute;
-	background-color: black;
-	left: 0;
-	top: 0;
-	width: 50%;
+export const Div = styled.div`
+	display: flex;
+`
+export const ImageSection = styled.img`
+	display: flex;
+	width: 100%;
 	height: 100vh;
-	object-fit: cover;
+	background-size: cover;
 	z-index: 1;
 `
 
@@ -16,9 +15,10 @@ export const LoginSection = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: end;
+	justify-content:center;
 	right: 0;
 	top: 0;
-	width: 100%;
+	width: 50%;
 	height: 100vh;
 	z-index: 2;
 `
@@ -26,7 +26,8 @@ export const LoginSection = styled.div`
 export const InputContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: 20%;
+	background-color: black;
+	width: 60%;
 	height: 50%;
 	justify-content:center;
 	align-items: center;
@@ -34,27 +35,28 @@ export const InputContainer = styled.div`
 	border-radius: 20px;
 	border-color: black;
 	margin: 100px;
-	gap: 30px;
-	padding: 10px;
+	gap: 20px;
+	font-size: 15px;
+	color: white;
 `
 export const DivInput = styled.div`
 	display: flex;
 	flex-direction: column;
 `
 
-
 export const Input = styled.input`
 	width:200px;
 	height: 30px;
 	border-radius: 10px;
+	border-color: transparent;
 `
 
 export const Button = styled.button`
-	width: 150px;
-	height: 40px;
+	width: 30%;
+	height: 30px;
 	border-radius:10px;
-	border-color:transparent;
-	background-color: blue;
-	color: white;
-	font-size: 18px;
+	border-color:black;
+	background-color: white;
+	color: black;
+	cursor: pointer;
 `
