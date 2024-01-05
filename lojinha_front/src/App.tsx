@@ -1,14 +1,32 @@
-import { useState } from 'react'
 import './App.css'
-import LoginScreen from './modules/login'
+import { RouteObject, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { loginRouter } from './modules/login/routes';
+import type { Router as RemixRouter } from '@remix-run/router'
+import { useNotification } from './shared/hooks/useNotification';
 
-function App() {
-  const [count, setCount] = useState(0)
 
+const mainRouter: RouteObject[] = [
+  {
+    path: '/',
+    element: <div>Home</div>,
+    errorElement: <div>Erro</div>
+  }
+];
+
+const router: RemixRouter = createBrowserRouter(
+  [
+    ...mainRouter,
+    ...loginRouter
+  ])
+
+export function App() {
+  const { contextHolder } = useNotification()
   return (
-    <div>
-      <LoginScreen></LoginScreen>
-    </div>
+    <>
+      {contextHolder}
+      <RouterProvider router={router} />
+    </>
+
   )
 }
 
