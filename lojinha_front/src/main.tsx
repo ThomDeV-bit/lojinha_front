@@ -9,6 +9,7 @@ import {
 import LoginScreen from './modules/login/index.ts';
 import type { Router as RemixRouter } from '@remix-run/router'
 import { loginRouter } from './modules/login/routes.tsx';
+import { GlobalProvider } from './shared/hooks/useGlobal.tsx';
 
 
 const mainRouter: RouteObject[] = [
@@ -27,6 +28,8 @@ const router: RemixRouter = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <GlobalProvider>
+      <RouterProvider router={router} />
+    </GlobalProvider>
   </React.StrictMode>,
 )

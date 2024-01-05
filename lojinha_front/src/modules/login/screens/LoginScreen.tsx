@@ -5,6 +5,7 @@ import { useState } from "react"
 
 
 export const LoginScreen = () => {
+
     const { load, getRequest } = useRequests()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -39,7 +40,7 @@ export const LoginScreen = () => {
                         <label>Password</label>
                         <Input onChange={handlePassword} value={password}></Input>
                     </DivInput>
-                    <Button type="primary" onClick={handleLogin}>Enter</Button>
+                    <Button loading={load} type="primary" onClick={handleLogin}>Enter</Button>
                 </InputContainer>
             </LoginSection>
         </Div>
