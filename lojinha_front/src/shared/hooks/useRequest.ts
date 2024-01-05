@@ -1,32 +1,30 @@
-import axios, { AxiosError } from "axios"
+import { AxiosError } from "axios"
 import { useState } from "react"
 import { useGlobalContext } from "./useGlobal"
+import { connectionAPIPost } from "../functions/connectionAPI"
 
 export const useRequests = () => {
+
 	const { setNotification } = useGlobalContext()
 	const [load, setLoad] = useState(false)
 
-	const getRequest = async (url: string, data: any) => {
+	const postRequest = async <T>(url: string, body: any): Promise<T | undefined> => {
 		setLoad(true)
-		try {
-			const response = await axios(
-				{
-					method: 'POST',
-					url,
-					data
-				}
-			)
-			setLoad(false)
-			setNotification('Entrando', 'success')
-			return response.data
-		} catch (error: AxiosError | any) {
-			setLoad(false)
-			setNotification('Usuario e senha invalidos', 'error')
-			alert(error?.response.data)
-		}
+
+		const response = await connectionAPIPost<T>(url, body)
+			.then((result) => {
+				setNotification('Entrando...', 'success')
+				return result
+			})
+			.catch((error: AxiosError) => {
+				setNotification(error?.message, 'error')
+				return undefined
+			})
+		setLoad(false)
+		return response
 	}
 	return {
 		load,
-		getRequest,
+		postRequest,
 	}
 }

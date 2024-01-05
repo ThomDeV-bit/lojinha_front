@@ -3,11 +3,12 @@ import { useRequests } from "../../../shared/hooks/useRequest"
 import { Div, ImageSection, LoginSection, InputContainer, DivInput, Input } from "../styled/loginScreen.styles"
 import { useState } from "react"
 import { useGlobalContext } from "../../../shared/hooks/useGlobal"
+import { User } from "../../types/UserType"
 
 
 export const LoginScreen = () => {
-    const { accessToken, setAccessToken } = useGlobalContext();
-    const { load, getRequest } = useRequests()
+    const { access_token, setAccessToken } = useGlobalContext();
+    const { load, postRequest } = useRequests()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -20,20 +21,23 @@ export const LoginScreen = () => {
     }
 
     const handleLogin = async () => {
-        setAccessToken('novo Token')
-        await getRequest('http://localhost:3001/singin/singin',
+        const user = await postRequest<User>('http://localhost:3001/singin/singin',
             {
                 email: email,
                 password: password
             }
         )
+        console.log(user?.access_token)
+
+        setAccessToken(user?.access_token || '')
+
     }
     return (
         <Div>
             <ImageSection src="./background.png"></ImageSection>
             <LoginSection>
                 <InputContainer>
-                    <h1>Login {accessToken}</h1>
+                    <h1>Login ({access_token})</h1>
                     <DivInput>
                         <label>Email</label>
                         <Input onChange={handleEmail} value={email}></Input>
