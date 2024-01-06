@@ -21,16 +21,14 @@ export const LoginScreen = () => {
     }
 
     const handleLogin = async () => {
-        const user = await postRequest<User>('http://localhost:3001/singin/singin',
+        const user= await postRequest('http://localhost:3001/singin/singin',
             {
                 email: email,
                 password: password
             }
         )
-        console.log(user?.access_token)
-
-        setAccessToken(user?.access_token || '')
-
+        console.log(user)
+        setAccessToken(user || '')
     }
     return (
         <Div>

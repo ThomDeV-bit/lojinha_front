@@ -2,16 +2,18 @@ import { AxiosError } from "axios"
 import { useState } from "react"
 import { useGlobalContext } from "./useGlobal"
 import { connectionAPIPost } from "../functions/connectionAPI"
+import { RemixServer } from "@remix-run/react"
+import { GlobalAPIResponse } from "../../modules/types/GlobalAPIResponse"
 
 export const useRequests = () => {
 
 	const { setNotification } = useGlobalContext()
 	const [load, setLoad] = useState(false)
 
-	const postRequest = async <T>(url: string, body: any): Promise<T | undefined> => {
+	const postRequest = async (url: string, body: any) => {
 		setLoad(true)
 
-		const response = await connectionAPIPost<T>(url, body)
+		const data = await connectionAPIPost(url, body)
 			.then((result) => {
 				setNotification('Entrando...', 'success')
 				return result
@@ -21,7 +23,8 @@ export const useRequests = () => {
 				return undefined
 			})
 		setLoad(false)
-		return response
+		
+		return data?.RESPONSE[0].acess_token
 	}
 	return {
 		load,

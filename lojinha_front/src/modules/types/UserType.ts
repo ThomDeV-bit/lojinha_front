@@ -1,3 +1,3 @@
 export type User = {
-	access_token: string
+	acess_token: string
 }
