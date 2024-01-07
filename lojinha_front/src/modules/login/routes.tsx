@@ -1,11 +1,14 @@
-import { RouteObject, createBrowserRouter } from "react-router-dom";
+import { RouteObject } from "react-router-dom";
 import LoginScreen from ".";
-import type { Router as RemixRouter } from '@remix-run/router'
+
+export enum LoginRouterEnum {
+    LOGIN = '/login'
+}
 
 
 export const loginRouter: RouteObject[] = [
     {
-        path: '/signIn',
+        path: LoginRouterEnum.LOGIN,
         element: <LoginScreen></LoginScreen>
     }
 ];

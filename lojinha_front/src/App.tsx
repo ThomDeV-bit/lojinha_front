@@ -3,6 +3,8 @@ import { RouteObject, createBrowserRouter, RouterProvider } from 'react-router-d
 import { loginRouter } from './modules/login/routes';
 import type { Router as RemixRouter } from '@remix-run/router'
 import { useNotification } from './shared/hooks/useNotification';
+import { firstScreenRouter } from './modules/firstScreen/routes';
+import { producstsRouter } from './modules/products/routes';
 
 
 const mainRouter: RouteObject[] = [
@@ -15,8 +17,9 @@ const mainRouter: RouteObject[] = [
 
 const router: RemixRouter = createBrowserRouter(
   [
-    ...mainRouter,
-    ...loginRouter
+    ...firstScreenRouter,
+    ...loginRouter,
+    ...producstsRouter
   ])
 
 export function App() {

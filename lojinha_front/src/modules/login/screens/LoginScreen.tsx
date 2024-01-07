@@ -35,7 +35,7 @@ export const LoginScreen = () => {
             <ImageSection src="./background.png"></ImageSection>
             <LoginSection>
                 <InputContainer>
-                    <h1>Login ({access_token})</h1>
+                    <h1>Login</h1>
                     <DivInput>
                         <label>Email</label>
                         <Input onChange={handleEmail} value={email}></Input>
