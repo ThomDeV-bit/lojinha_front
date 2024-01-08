@@ -3,9 +3,6 @@ import FirstScreen from "./screens/FirstScreen";
 
 
 
-
-
-
 export const firstScreenRouter: RouteObject[] = [
     {
         path: '/',

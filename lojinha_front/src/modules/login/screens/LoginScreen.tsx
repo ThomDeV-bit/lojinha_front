@@ -2,16 +2,17 @@ import { Button } from "antd"
 import { useRequests } from "../../../shared/hooks/useRequest"
 import { Div, ImageSection, LoginSection, InputContainer, DivInput, Input } from "../styled/loginScreen.styles"
 import { useState } from "react"
-import { useGlobalContext } from "../../../shared/hooks/useGlobal"
-import { User } from "../../types/UserType"
+import { Navigate, useNavigate } from "react-router-dom"
+import { ProductsRouterEnum } from "../../products/routes"
+import { setAuthorizationToken } from "../../../shared/functions/auth"
+
 
 
 export const LoginScreen = () => {
-    const { access_token, setAccessToken } = useGlobalContext();
     const { load, postRequest } = useRequests()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    const navigate = useNavigate()
     const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
     }
@@ -21,14 +22,13 @@ export const LoginScreen = () => {
     }
 
     const handleLogin = async () => {
-        const user= await postRequest('http://localhost:3001/singin/singin',
+        const user = await postRequest('http://localhost:3001/singin/singin',
             {
                 email: email,
                 password: password
             }
         )
         console.log(user)
-        setAccessToken(user || '')
     }
     return (
         <Div>

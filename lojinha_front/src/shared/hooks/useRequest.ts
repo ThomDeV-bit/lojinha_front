@@ -2,12 +2,12 @@ import { AxiosError } from "axios"
 import { useState } from "react"
 import { useGlobalContext } from "./useGlobal"
 import { connectionAPIPost } from "../functions/connectionAPI"
-import { RemixServer } from "@remix-run/react"
-import { GlobalAPIResponse } from "../../modules/types/GlobalAPIResponse"
+import { setAuthorizationToken } from "../functions/auth"
+
 
 export const useRequests = () => {
 
-	const { setNotification } = useGlobalContext()
+	const { setNotification, setUser } = useGlobalContext()
 	const [load, setLoad] = useState(false)
 
 	const postRequest = async (url: string, body: any) => {
@@ -15,6 +15,9 @@ export const useRequests = () => {
 
 		const data = await connectionAPIPost(url, body)
 			.then((result) => {
+				console.log(result.RESPONSE[0])
+				setUser(result.RESPONSE[0])
+				setAuthorizationToken(result?.RESPONSE[0].acess_token)
 				setNotification('Entrando...', 'success')
 				return result
 			})

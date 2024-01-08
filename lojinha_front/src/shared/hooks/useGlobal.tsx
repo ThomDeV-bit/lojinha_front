@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getAuthorizationToken, setAuthorizationToken } from "../functions/auth";
+import { User } from "../../modules/types/UserType";
 
 interface NotificationsProps {
     message: string;
@@ -7,9 +8,11 @@ interface NotificationsProps {
     description?: string
 };
 
-
+interface UserType {
+    access_token: string
+}
 interface GlobalData {
-    access_token?: string;
+    user?: UserType;
     notification?: NotificationsProps
 
 };
@@ -38,15 +41,6 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
 export const useGlobalContext = () => {
     const { globalData, setGlobalData } = useContext(GlobalContext)
 
-
-
-    const setAccessToken = (access_token: string) => {
-        setAuthorizationToken(access_token)
-        setGlobalData({
-            ...globalData,
-            access_token
-        });
-    };
     const setNotification = (message: string, type: 'success' | 'info' | 'warning' | 'error', description?: string) => {
         setGlobalData({
             ...globalData,
@@ -57,10 +51,19 @@ export const useGlobalContext = () => {
             }
         })
     }
+
+    const setUser = (access_token: string) => {
+        setGlobalData({
+            ...globalData,
+            user : {
+                access_token,
+            }
+        })
+    }
     return {
         notification: globalData?.notification,
-        access_token: globalData?.access_token,
-        setAccessToken,
-        setNotification
+        setNotification,
+        user: globalData.user,
+        setUser
     };
 };
