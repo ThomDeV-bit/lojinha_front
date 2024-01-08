@@ -28,7 +28,7 @@ export const LoginScreen = () => {
                 password: password
             }
         )
-        console.log(user)
+        console.log(user?.RESPONSE.access_token)
     }
     return (
         <Div>

@@ -15,9 +15,9 @@ export const useRequests = () => {
 
 		const data = await connectionAPIPost(url, body)
 			.then((result) => {
-				console.log(result.RESPONSE[0])
-				setUser(result.RESPONSE[0])
-				setAuthorizationToken(result?.RESPONSE[0].acess_token)
+				console.log(result.RESPONSE.access_token)
+				setUser(result.RESPONSE)
+				setAuthorizationToken(result.RESPONSE.access_token)
 				setNotification('Entrando...', 'success')
 				return result
 			})
@@ -26,8 +26,8 @@ export const useRequests = () => {
 				return undefined
 			})
 		setLoad(false)
-		
-		return data?.RESPONSE[0].acess_token
+
+		return data
 	}
 	return {
 		load,

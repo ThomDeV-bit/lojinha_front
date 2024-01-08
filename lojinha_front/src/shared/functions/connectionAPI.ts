@@ -6,23 +6,23 @@ import { getAuthorizationToken } from "./auth";
 
 export default class ConnectionAPI {
 	static async call(url: string, method: string, body: unknown) {
-		const config : AxiosRequestConfig = {
-			headers : {
-				Authorization: getAuthorizationToken(),
-				"Content-Type" :'application/json'
+		const config: AxiosRequestConfig = {
+			headers: {
+				Authorization: `Bearer ${getAuthorizationToken()}`,
+				"Content-Type": 'application/json'
 			}
 		}
 		switch (method) {
 			case (MethodsEnum.GET):
-				return (await axios.get(url,config)).data;
+				return (await axios.get(url, config)).data;
 			case (MethodsEnum.DELETE):
-				return (await axios.delete(url,config)).data;
+				return (await axios.delete(url, config)).data;
 			case (MethodsEnum.POST):
-				return (await axios.post(url, body,config)).data;
+				return (await axios.post(url, body, config)).data;
 			case (MethodsEnum.PATCH):
-				return (await axios.patch(url, body,config)).data;
+				return (await axios.patch(url, body, config)).data;
 			default:
-				return (await axios.put(url, body,config)).data;
+				return (await axios.put(url, body, config)).data;
 
 		}
 	}
@@ -49,7 +49,7 @@ export const connectionAPIGet = async<T>(url: string): Promise<T> => {
 export const connectionAPIDelete = async <T>(url: string): Promise<T> => {
 	return ConnectionAPI.connect(url, MethodsEnum.DELETE)
 }
-export const connectionAPIPost = async (url: string, body: unknown) : Promise <GlobalAPIResponse>=> {
+export const connectionAPIPost = async (url: string, body: unknown): Promise<GlobalAPIResponse> => {
 	return ConnectionAPI.connect(url, MethodsEnum.POST, body)
 }
 export const connectionAPIPut = async <T>(url: string, body: unknown): Promise<T> => {
