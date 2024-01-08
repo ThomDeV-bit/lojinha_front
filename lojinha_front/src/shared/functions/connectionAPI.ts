@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { MethodsEnum } from "../enums/methods.enum";
 import { ERRO_ACCESSE_DENIED, ERRO_CONNECTION } from "../constants/errorStatus";
-import { GlobalAPIResponse } from "../../modules/types/GlobalAPIResponse";
+import { GlobalAPIResponse } from "../types/GlobalAPIResponse";
 import { getAuthorizationToken } from "./auth";
 
 export default class ConnectionAPI {

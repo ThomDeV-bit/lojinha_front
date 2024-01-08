@@ -1,4 +1,4 @@
-import { User } from "../../modules/types/UserType";
+import { User } from "../types/UserType";
 import { AUTHOTIZATION_KEY } from "../constants/authorizationConstants";
 import { getItemStorage, removeItem, setItemStorage } from "./localStorageProxy";
 import { connectionAPIGet } from "./connectionAPI";

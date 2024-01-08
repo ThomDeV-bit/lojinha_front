@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { User } from "../../modules/types/UserType";
+import { User } from "../types/UserType";
 
 interface NotificationsProps {
     message: string;
