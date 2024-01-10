@@ -20,7 +20,7 @@ export const verifyLoggedIn = async (setUser: (user: User) => void, user?: User)
 	}
 	if (!user) {
 		await connectionAPIGet('http://localhost:3001/users/search').then((userReturn) => {
-			console.log(userReturn.RESPONSE, 'dadadad')
+			console.log(userReturn.RESPONSE)
 			setUser(userReturn.RESPONSE)
 		})
 			.catch((error) => {

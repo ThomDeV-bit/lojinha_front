@@ -9,9 +9,11 @@ import { setAuthorizationToken } from "../../../shared/functions/auth"
 
 
 export const LoginScreen = () => {
-    const { load, postRequest } = useRequests()
+    const { load, loginRequest } = useRequests()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+
     const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
     }
@@ -21,12 +23,13 @@ export const LoginScreen = () => {
     }
 
     const handleLogin = async () => {
-        const user = await postRequest('http://localhost:3001/singin/singin',
+        const user = await loginRequest('http://localhost:3001/singin/singin',
             {
                 email: email,
                 password: password
             }
         )
+        console.log(user)
     }
     return (
         <Div>

@@ -1,16 +1,32 @@
 import { AxiosError } from "axios"
 import { useState } from "react"
 import { useGlobalContext } from "./useGlobal"
-import { connectionAPIPost } from "../functions/connectionAPI"
+import { connectionAPIGet, connectionAPIPost } from "../functions/connectionAPI"
 import { setAuthorizationToken } from "../functions/auth"
+import { ProductType } from "../types/ProductTyp"
 
 
 export const useRequests = () => {
-
 	const { setNotification, setUser } = useGlobalContext()
 	const [load, setLoad] = useState(false)
 
-	const postRequest = async (url: string, body: any) => {
+	const getProduct = async<ProductType>(url: string, saveGlobal: (object: ProductType[]) => void): Promise<ProductType[]> => {
+		setLoad(true)
+		const data = await connectionAPIGet(url)
+			.then((result) => {
+				if (saveGlobal) {
+					saveGlobal(result.RESPONSE)
+				}
+				return result.RESPONSE
+			})
+			.catch((err: AxiosError) => {
+				setNotification(err?.message, 'error')
+				return undefined
+			})
+		return data
+	}
+
+	const loginRequest = async (url: string, body: any) => {
 		setLoad(true)
 
 		const data = await connectionAPIPost(url, body)
@@ -30,6 +46,7 @@ export const useRequests = () => {
 	}
 	return {
 		load,
-		postRequest,
+		loginRequest,
+		getProduct
 	}
 }

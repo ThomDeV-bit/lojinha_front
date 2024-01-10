@@ -1,15 +1,15 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import { GlobalProvider } from './shared/hooks/useGlobal'
+import { DataProvider } from './shared/hooks/useDataContext'
 
 
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <GlobalProvider>
+  <GlobalProvider>
+    <DataProvider>
       <App />
-    </GlobalProvider>
-  </React.StrictMode>,
+    </DataProvider>
+  </GlobalProvider>
 )
