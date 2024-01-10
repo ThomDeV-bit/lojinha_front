@@ -12,13 +12,11 @@ export const setAuthorizationToken = (token: string) => {
 }
 export const getAuthorizationToken = () => getItemStorage(AUTHOTIZATION_KEY)
 
-export const verifyLoggedIn = async (
-	setUser: any,
-	user?: User,
-) => {
+export const verifyLoggedIn = async (setUser: (user: User) => void, user?: User) => {
 	if (!user) {
 		await connectionAPIGet('http://localhost:3001/users/search').then((userReturn) => {
-			setUser(userReturn)
+			console.log(userReturn.RESPONSE,'dadadad')
+			setUser(userReturn.RESPONSE)
 		})
 			.catch((error) => {
 				unsetAuthorizationToken()

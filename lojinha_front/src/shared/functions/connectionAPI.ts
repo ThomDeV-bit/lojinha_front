@@ -43,7 +43,7 @@ export default class ConnectionAPI {
 	}
 }
 
-export const connectionAPIGet = async<T>(url: string): Promise<T> => {
+export const connectionAPIGet = async(url: string): Promise<GlobalAPIResponse> => {
 	return ConnectionAPI.connect(url, MethodsEnum.GET)
 }
 export const connectionAPIDelete = async <T>(url: string): Promise<T> => {

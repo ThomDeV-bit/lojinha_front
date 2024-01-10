@@ -12,7 +12,6 @@ export const LoginScreen = () => {
     const { load, postRequest } = useRequests()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const navigate = useNavigate()
     const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
     }
@@ -28,7 +27,6 @@ export const LoginScreen = () => {
                 password: password
             }
         )
-        console.log(user?.RESPONSE.access_token)
     }
     return (
         <Div>

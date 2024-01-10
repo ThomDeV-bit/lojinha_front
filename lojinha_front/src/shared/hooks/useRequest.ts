@@ -15,11 +15,10 @@ export const useRequests = () => {
 
 		const data = await connectionAPIPost(url, body)
 			.then((result) => {
-				console.log(result.RESPONSE.access_token)
-				setUser(result.RESPONSE)
 				setAuthorizationToken(result.RESPONSE.access_token)
+				setUser(result.RESPONSE)
 				setNotification('Entrando...', 'success')
-				return result
+				return result.RESPONSE?.access_token
 			})
 			.catch((error: AxiosError) => {
 				setNotification(error?.message, 'error')
