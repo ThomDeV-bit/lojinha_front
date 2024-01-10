@@ -2,7 +2,40 @@ import { useEffect } from "react";
 import { useDataContext } from "../../../shared/hooks/useDataContext";
 import { useRequests } from "../../../shared/hooks/useRequest";
 import { ProductType } from "../../../shared/types/ProductTyp";
+import { Space, Table, Tag } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
 
+
+const columns: ColumnsType<ProductType> = [
+    {
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+        render: (text) => <a>{text}</a>,
+    },
+    {
+        title: 'Price',
+        dataIndex: 'price',
+        key: 'price',
+    },
+    {
+        title: 'Quantity',
+        dataIndex: 'quantity',
+        key: 'quantity',
+    },
+    {
+        title: 'Categorie',
+        dataIndex: 'categorie',
+        key: 'categorie',
+    },
+    {
+        title: 'Image',
+        dataIndex: 'image',
+        key: 'image',
+    },
+
+
+];
 const Product = () => {
     const { products, setProducts } = useDataContext()
     const { getProduct } = useRequests()
@@ -14,7 +47,8 @@ const Product = () => {
     console.log(products.map(prod => prod.name))
 
     return (
-        <div>{`PRODUTOS ${products.map(prod => prod.name)}`}`</div>
+
+        <Table columns={columns} dataSource={products} />
     )
 }
 
