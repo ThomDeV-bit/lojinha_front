@@ -34,7 +34,7 @@ export const InputContainer = styled.div`
 	background-color:  rgb(4, 166, 211);
 	border-radius: 20px;
 	border-color: black;
-	margin: 100px;
+	margin: 80px;
 	gap: 20px;
 	font-size: 15px;
 	color: white;

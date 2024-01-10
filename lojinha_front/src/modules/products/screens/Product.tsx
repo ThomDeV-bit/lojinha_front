@@ -2,9 +2,9 @@ import { useGlobalContext } from "../../../shared/hooks/useGlobal";
 
 const Product = () => {
     const { user } = useGlobalContext()
-    console.log(user?.access_token,'adadadad')
+    console.log(user, 'adadadad')
     return (
-        <div>{`PRODUTOS ${user?.access_token}`}</div>
+        <div>{`PRODUTOS ${user}`}</div>
     )
 }
 
