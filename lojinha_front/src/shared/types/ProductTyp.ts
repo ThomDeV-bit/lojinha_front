@@ -7,8 +7,18 @@ export type ProductType = {
 
 	quantity: number
 
-	categorie: string
+	categorie: CategorieType[]
 
-	image: Blob | any
+	image: ImageType[]
 
+}
+
+export type CategorieType = {
+	id: string
+	name: string
+}
+
+export type ImageType = {
+	id: string
+	image: Blob
 }
