@@ -9,7 +9,7 @@ export type ProductType = {
 
 	categorie: CategorieType[]
 
-	image: ImageType[]
+	image: ImageType[] | any 
 
 }
 

@@ -6,6 +6,14 @@ import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Buffer } from "buffer";
 
+export function readFile(blob: Blob) {
+    const fileReader = new FileReader()
+    fileReader.addEventListener('load', (e) => {
+        const res = e.target?.result
+        fileReader.readAsDataURL(blob)
+
+    })
+}
 const columns: ColumnsType<ProductType> = [
     {
         title: 'Name',
@@ -45,21 +53,11 @@ const columns: ColumnsType<ProductType> = [
         key: 'image',
         render: (_, { image }) => (
             <>
-                {image.map((image) => {
-                    let fileReader = new FileReader()
-                    const imagem = new Blob([image.image], { type: 'image/webp' })
-                    let im = new ArrayBuffer(imagem.size)
-                    const res = Buffer.from(im).toString('base64')
-
-                    fileReader.onload = function () {
-                        fileReader.result
-                        console.log(fileReader.result)
-
-                    }
-                    fileReader.readAsArrayBuffer(imagem)
+                {image.map((image: Blob | any) => {
+                    const al = Buffer.from(image.image['data']).toString('base64')
                     return (
                         <div>
-                            <img src={`data:image/png;base64,${imagem}`} />
+                            <img style={{ height: 50, width: 50 }} src={`data:image/png;base64,${al}`} />
                         </div>
                     )
                 }
@@ -80,7 +78,6 @@ const Product = () => {
     useEffect(() => {
         getProduct<ProductType>('http://localhost:3001/product', setProducts)
     }, [])
-    const cate = (products.map(prod => prod.image))
 
     return (
 
