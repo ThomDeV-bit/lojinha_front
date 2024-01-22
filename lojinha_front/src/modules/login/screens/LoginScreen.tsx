@@ -2,9 +2,7 @@ import { Button } from "antd"
 import { useRequests } from "../../../shared/hooks/useRequest"
 import { Div, ImageSection, LoginSection, InputContainer, DivInput, Input } from "../styled/loginScreen.styles"
 import { useState } from "react"
-import { Navigate, useNavigate } from "react-router-dom"
-import { ProductsRouterEnum } from "../../products/routes"
-import { setAuthorizationToken } from "../../../shared/functions/auth"
+
 
 
 

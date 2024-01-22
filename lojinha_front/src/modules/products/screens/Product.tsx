@@ -2,34 +2,21 @@ import { useEffect } from "react";
 import { useDataContext } from "../../../shared/hooks/useDataContext";
 import { useRequests } from "../../../shared/hooks/useRequest";
 import { ProductType } from "../../../shared/types/ProductTyp";
-import { Table } from 'antd';
+import { Button, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Buffer } from "buffer";
+import { Container, GridContainer } from "../styled/productScreen.styles";
+import { convertNumber } from "../../../shared/functions/convertNumber";
+import { useNavigate } from "react-router-dom";
+import { ProductsRouterEnum } from "../routes";
 
-export function readFile(blob: Blob) {
-    const fileReader = new FileReader()
-    fileReader.addEventListener('load', (e) => {
-        const res = e.target?.result
-        fileReader.readAsDataURL(blob)
 
-    })
-}
 const columns: ColumnsType<ProductType> = [
     {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
         render: (text) => <a>{text}</a>,
-    },
-    {
-        title: 'Price',
-        dataIndex: 'price',
-        key: 'price',
-    },
-    {
-        title: 'Quantity',
-        dataIndex: 'quantity',
-        key: 'quantity',
     },
     {
         title: 'Categorie',
@@ -40,7 +27,7 @@ const columns: ColumnsType<ProductType> = [
                 {categorie.map((categorie) => {
                     let categorieName = categorie.name
                     return (
-                        <div key={categorieName}>{categorieName}</div>
+                        <Tag color="green">{categorieName}</Tag>
                     )
                 }
                 )}
@@ -54,6 +41,7 @@ const columns: ColumnsType<ProductType> = [
         render: (_, { image }) => (
             <>
                 {image.map((image: Blob | any) => {
+                    console.log(image)
                     const al = Buffer.from(image.image['data']).toString('base64')
                     return (
                         <div>
@@ -66,23 +54,38 @@ const columns: ColumnsType<ProductType> = [
             </>
         )
     },
+    {
+        title: 'Price',
+        dataIndex: 'price',
+        key: 'price',
+        render: (_, { price }) => <a>{convertNumber(price)}</a>
+    },
 
 
 
 ];
-const Product = () => {
+export const Product = () => {
     const { products, setProducts } = useDataContext()
     const { getProduct } = useRequests()
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         getProduct<ProductType>('http://localhost:3001/product', setProducts)
     }, [])
 
-    return (
+    const handleOnClickInsert = () => {
+        navigate(ProductsRouterEnum.PRODUCTS_INSERT)
+    }
 
-        <Table columns={columns} dataSource={products} />
+    return (
+        <Container>
+            <div>
+                <Button style={{ width: 400, marginTop: 10 }} onClick={handleOnClickInsert}>Adicionar Produto</Button>
+            </div>
+            <GridContainer>
+                <Table columns={columns} dataSource={products} />
+            </GridContainer>
+        </Container>
     )
 }
 
-export default Product;

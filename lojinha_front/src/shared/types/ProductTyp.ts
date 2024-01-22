@@ -20,5 +20,8 @@ export type CategorieType = {
 
 export type ImageType = {
 	id: string
-	image: Blob
+	image: {
+		type: "Buffer"
+		data: []
+	}
 }
