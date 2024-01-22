@@ -1,5 +1,5 @@
 import { RouteObject } from "react-router-dom";
-import { ProductImage } from "./screens/ProductImage";
+import { ProductImage } from "./screens/InsertProductScreen";
 import { Product } from "./screens/Product";
 
 
